@@ -16,4 +16,4 @@ Esta es una aplicación web interactiva creada con [Streamlit](https://streamlit
 ## 🌐 Cómo usarla en línea
 
 Puedes probar la aplicación directamente en Streamlit Cloud aquí:  
-👉 [https://appasistencia.streamlit.app](https://tu_usuario.streamlit.app)
+👉 [https://informe-asistencia.streamlit.app](https://tu_usuario.streamlit.app)
