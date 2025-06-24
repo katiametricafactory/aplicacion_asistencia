@@ -14,7 +14,7 @@ import bcrypt
 import os
 
 
-PASSWORD = os.environ.get("PLAIN_PASSWORD") # Aquí recuperas el secreto
+PASSWORD = os.environ.get("PLAIN_PASSWORD") 
 
 def check_password():
     if "authenticated" not in st.session_state:
