@@ -14,21 +14,24 @@ import bcrypt
 import os
 
 
+PASSWORD = os.environ.get("PLAIN_PASSWORD") # Aquí recuperas el secreto
+
 def check_password():
     if "authenticated" not in st.session_state:
         st.session_state["authenticated"] = False
-        st.session_state["password"] = ""
 
     if not st.session_state["authenticated"]:
         st.title("🔐 Acceso restringido")
-        st.session_state["password"] = st.text_input("Introduce la contraseña:", type="password")
+        password_input = st.text_input("Introduce la contraseña:", type="password")
         if st.button("Entrar"):
-            if st.session_state["password"] == PASSWORD:
+            if password_input == PASSWORD:
                 st.session_state["authenticated"] = True
+                st.experimental_rerun()
             else:
                 st.error("❌ Contraseña incorrecta")
-        if not st.session_state["authenticated"]:
-            st.stop()
+        st.stop()
+
+check_password()
 
 # --- Contenido principal de la app ---
 st.title("🎓 Informe de Asistencia")
