@@ -2,6 +2,25 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 
+PASSWORD = os.environ.get("PLAIN_PASSWORD") 
+
+def check_password():
+    if "authenticated" not in st.session_state:
+        st.session_state["authenticated"] = False
+        st.session_state["password"] = ""
+
+    if not st.session_state["authenticated"]:
+        st.title("🔐 Acceso restringido")
+        st.session_state["password"] = st.text_input("Introduce la contraseña:", type="password")
+        if st.button("Entrar"):
+            if st.session_state["password"] == PASSWORD:
+                st.session_state["authenticated"] = True
+            else:
+                st.error("❌ Contraseña incorrecta")
+        if not st.session_state["authenticated"]:
+            st.stop()
+
+check_password()
 st.set_page_config(page_title="Informe de Asistencia", layout="wide")
 
 st.markdown("""
