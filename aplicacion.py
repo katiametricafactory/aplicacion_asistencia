@@ -19,17 +19,18 @@ PASSWORD = os.environ.get("PLAIN_PASSWORD") # Aquí recuperas el secreto
 def check_password():
     if "authenticated" not in st.session_state:
         st.session_state["authenticated"] = False
+        st.session_state["password"] = ""
 
     if not st.session_state["authenticated"]:
         st.title("🔐 Acceso restringido")
-        password_input = st.text_input("Introduce la contraseña:", type="password")
+        st.session_state["password"] = st.text_input("Introduce la contraseña:", type="password")
         if st.button("Entrar"):
-            if password_input == PASSWORD:
+            if st.session_state["password"] == PASSWORD:
                 st.session_state["authenticated"] = True
-                st.experimental_rerun()
             else:
                 st.error("❌ Contraseña incorrecta")
-        st.stop()
+        if not st.session_state["authenticated"]:
+            st.stop()
 
 check_password()
 
