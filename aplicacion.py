@@ -10,8 +10,32 @@ from plotly.subplots import make_subplots
 import plotly.express as px
 import plotly.colors as pc
 import streamlit as st
+import bcrypt
+import os
 
+# --- Comprobación de contraseña con hash ---
+def check_password():
+    def password_entered():
+        user_password = st.session_state["password"].encode("utf-8")
+        stored_hash = os.environ.get("PASSWORD_HASH", "").encode("utf-8")
+        if bcrypt.checkpw(user_password, stored_hash):
+            st.session_state["authenticated"] = True
+        else:
+            st.session_state["authenticated"] = False
 
+    if "authenticated" not in st.session_state:
+        st.session_state["authenticated"] = False
+
+    if not st.session_state["authenticated"]:
+        st.title("🔐 Acceso restringido")
+        st.text_input("Introduce la contraseña:", type="password", key="password", on_change=password_entered)
+        st.stop()
+
+check_password()
+
+# --- Contenido principal de la app ---
+st.title("🎓 Informe de Asistencia")
+st.write("¡Bienvenido! Ya has accedido a la aplicación protegida.")
 
 st.set_page_config(page_title="Informe de Asistencia", layout="wide")
 st.title("📁 Subida dos ficheiros dos Profesores y Xeneración de Informes")
