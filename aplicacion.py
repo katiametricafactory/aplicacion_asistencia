@@ -35,8 +35,6 @@ def check_password():
 check_password()
 
 # --- Contenido principal de la app ---
-st.title("🎓 Informe de Asistencia")
-st.write("¡Bienvenido! Ya has accedido a la aplicación protegida.")
 
 st.set_page_config(page_title="Informe de Asistencia", layout="wide")
 st.title("📁 Subida dos ficheiros dos Profesores y Xeneración de Informes")
